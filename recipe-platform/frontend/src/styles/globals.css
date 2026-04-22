@@ -1,0 +1,108 @@
+/* ============================= */
+/* 1. TAILWIND (ALWAYS FIRST) */
+/* ============================= */
+@import "tailwindcss";
+
+/* ============================= */
+/* 2. GLOBAL STYLES */
+/* ============================= */
+
+:root {
+  --cream: #fdf6ee;
+  --cream-dark: #f5ead8;
+  --brown-100: #e8d5b7;
+  --brown-300: #c4955a;
+  --brown-500: #8b5e3c;
+  --brown-700: #5c3d20;
+  --brown-900: #1a0a00;
+  --rust: #c0440a;
+  --rust-light: #e8601f;
+  --sage: #6b8f71;
+  --sage-light: #a3c4a8;
+  --white: #ffffff;
+
+  --text-primary: #1a0a00;
+  --text-secondary: #6b4e2a;
+  --text-muted: #9e7a54;
+
+  --border: #dfc9a8;
+
+  --shadow-sm: 0 1px 3px rgba(26,10,0,0.08);
+  --shadow-md: 0 4px 16px rgba(26,10,0,0.12);
+  --shadow-lg: 0 12px 40px rgba(26,10,0,0.16);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+
+  --transition: 0.2s ease;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--text-primary);
+}
+
+/* ============================= */
+/* 3. ANIMATIONS */
+/* ============================= */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* ============================= */
+/* 4. UTILITIES */
+/* ============================= */
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--cream-dark) 25%,
+    var(--brown-100) 50%,
+    var(--cream-dark) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================= */
+/* 5. BUTTON HOVER (ADD HERE) */
+/* ============================= */
+
+.btn-hover:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn-hover:active {
+  transform: translateY(0);
+}
