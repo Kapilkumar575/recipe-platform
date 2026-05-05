@@ -19,26 +19,30 @@ connectDB();
 
 const app = express();
 
-/* ===== CORS CONFIG (FINAL FIX) ===== */
+/* ===== CORS (FINAL FIX) ===== */
 const allowedOrigins = [
-  "http://localhost:5173", // local frontend
-  "https://recipe-platform-rose.vercel.app" // deployed frontend
+  "http://localhost:5173",
+  "https://recipe-platform-rose.vercel.app"
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, Postman)
+    // allow requests with no origin (Postman, mobile apps)
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
-      return callback(new Error("CORS not allowed"));
+      return callback(null, false);
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+// 🔥 VERY IMPORTANT: handle preflight requests
+app.options("*", cors());
 
 /* ===== MIDDLEWARE ===== */
 app.use(express.json());
@@ -49,10 +53,10 @@ app.use("/api/recipes", recipeRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/upload", uploadRoutes);
 
-/* ===== STATIC FILES ===== */
+/* ===== STATIC ===== */
 app.use("/uploads", express.static("uploads"));
 
-/* ===== TEST ROUTE ===== */
+/* ===== TEST ===== */
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
