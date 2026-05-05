@@ -85,7 +85,7 @@ npm run dev
 Create `.env` file in frontend:
 
 ```
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=https://reciple-backend.onrender.com/api
 ```
 
 Create `.env` file in backend:

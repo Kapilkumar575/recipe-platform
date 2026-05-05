@@ -21,8 +21,8 @@ const app = express();
 /* ===== MIDDLEWARE ===== */
 app.use(cors({
   origin: [
-    "http://localhost:5173", // local frontend
-    "https://your-frontend.vercel.app" // later when deployed
+     // local frontend
+    "https://recipe-platform-rose.vercel.app" // later when deployed
   ],
   credentials: true,
 }));

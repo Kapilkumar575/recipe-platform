@@ -29,7 +29,7 @@ export const formatDate = (dateStr) => {
 export const getImageUrl = (path) => {
   if (!path) return null;
   if (path.startsWith('http')) return path;
-  const base = import.meta.env.VITE_UPLOAD_URL|| 'http://localhost:5000';
+  const base = import.meta.env.VITE_UPLOAD_URL|| 'https://reciple-backend.onrender.com';
   return `${base}${path}`;
 };
 
