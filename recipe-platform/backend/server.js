@@ -4,64 +4,41 @@ import cors from "cors";
 
 import connectDB from "./config/db.js";
 
-// Register models
 import "./models/usermodel.js";
 import "./models/Recipemodel.js";
 
-// Routes
 import authRoutes from "./routes/Authroute.js";
 import recipeRoutes from "./routes/Recipe.js";
 import userRoutes from "./routes/user.js";
 import uploadRoutes from "./routes/upload.js";
 
 dotenv.config();
-connectDB();
 
 const app = express();
 
-/* ===== CORS (FINAL FIX) ===== */
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://recipe-platform-rose.vercel.app"
-];
+connectDB();
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (Postman, mobile apps)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(null, false);
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: [
+    "http://localhost:5173",
+    "https://recipe-platform-rose.vercel.app"
+  ],
   credentials: true
 }));
 
-// 🔥 VERY IMPORTANT: handle preflight requests
-app.options("*", cors());
-
-/* ===== MIDDLEWARE ===== */
 app.use(express.json());
 
-/* ===== ROUTES ===== */
 app.use("/api/auth", authRoutes);
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/upload", uploadRoutes);
 
-/* ===== STATIC ===== */
 app.use("/uploads", express.static("uploads"));
 
-/* ===== TEST ===== */
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-/* ===== SERVER ===== */
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
