@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api': 'https://recipe-backend.onrender.com',
+      '/api': 'https://recipe-backend-n19k.onrender.com',
     },
   },
 })
